@@ -1,10 +1,3 @@
-var http = require('http');
-var logger = require('./tools/logger');
-var cookiesParser = require('./tools/cookiesParser');
-var router = require('./tools/router');
-var cacher = require('./tools/cacher');
-
-
 http.createServer(function (req, res) {
     var cookies = cookiesParser.parseCookies(req);
     logger.log(req);
