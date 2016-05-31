@@ -6,15 +6,19 @@ var http = require('http'),
     cookiesParser = require('./tools/cookiesParser'),
     router = require('./tools/router'),
     cacher = require('./tools/cacher'),
+    port = require('./tools/port'),
     fs = require('fs'),
     vm = require('vm');
+
+
 
 var context = {
     http : http,
     logger : logger,
     cookiesParser : cookiesParser,
     router : router,
-    cacher : cacher
+    cacher : cacher,
+    port : port
 };
 
 context.global = context;
@@ -23,7 +27,8 @@ var sandbox = vm.createContext(context);
 var fileName = './goodServer.js';
 fs.readFile(fileName, function(err, src) {
     if(!err) {
-        console.log("Server was launched");
+        logger.logString("Server was launched");
+        port.port = parseInt(process.argv[2]);
         var script = vm.createScript(src, fileName);
         script.runInNewContext(sandbox);
     } else {
