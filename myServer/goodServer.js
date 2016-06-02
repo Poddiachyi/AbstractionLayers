@@ -2,7 +2,7 @@ http.createServer(function (req, res) {
     var cookies = cookiesParser.parseCookies(req);
     logger.log(req);
     if (cacher.cache[req.url] && req.method === 'GET') {
-        logger.logString('Getting from cache');
+        console.log('Getting from cache');
         res.writeHead(200);
         res.end(cacher.cache[req.url]);
     } else {

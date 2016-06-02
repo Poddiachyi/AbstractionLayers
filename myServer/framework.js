@@ -18,7 +18,8 @@ var context = {
     cookiesParser : cookiesParser,
     router : router,
     cacher : cacher,
-    port : port
+    port : port,
+    console : console
 };
 
 context.global = context;
@@ -27,7 +28,7 @@ var sandbox = vm.createContext(context);
 var fileName = './goodServer.js';
 fs.readFile(fileName, function(err, src) {
     if(!err) {
-        logger.logString("Server was launched");
+        console.log('Server was launched"')
         port.port = parseInt(process.argv[2]);
         var script = vm.createScript(src, fileName);
         script.runInNewContext(sandbox);
